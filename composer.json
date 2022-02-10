@@ -1,0 +1,40 @@
+{
+  "name": "fernandosena/freelashop",
+  "description": "Site de prestação de serviço para freelancer e contratante",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Fernando C. Sena",
+      "email": "fernandocarvalho.sena@gmail.com",
+      "homepage": "https://www.freelashop.com.br",
+      "role": "Developer"
+    }
+  ],
+  "config": {
+    "vendor-dir": "vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "Source\\": "source/"
+    },
+    "files": [
+      "source/Boot/Config.php",
+      "source/Boot/Helpers.php",
+      "source/Boot/Minify/Web.php"
+    ]
+  },
+  "require": {
+    "php": "^7.2",
+    "ext-pdo": "^7.2",
+    "phpmailer/phpmailer": "6.5.*",
+    "league/plates": "v4.0.0-alpha",
+    "monolog/monolog": "2.3.*",
+    "matthiasmullie/minify": "1.3.*",
+    "coffeecode/uploader": "1.0.*",
+    "coffeecode/cropper": "1.3.*",
+    "coffeecode/optimizer": "2.0.*",
+    "coffeecode/paginator": "1.0.*",
+    "coffeecode/router": "1.0.*"
+  }
+}
