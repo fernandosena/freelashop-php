@@ -40,8 +40,7 @@
                                     <i class="fas fa-map-marker-alt"></i> <?= CONF_SITE_ADDR_STREET." Nº ".CONF_SITE_ADDR_NUMBER.", ".CONF_SITE_ADDR_CITY." ".CONF_SITE_ADDR_STATE." - ".CONF_SITE_ADDR_ZIPCODE ?></div>
                             </li>
                             <li class="media-body">
-                                <i class="fas fa-envelope"></i> <a class="white" href="mailto:<?= CONF_MAIL_SUPPORT ?>"><?= CONF_MAIL_SUPPORT ?></a><br>
-                                <i class="fas fa-phone"></i> <a class="white" href="tel:<?= str_replace(['(',')', '-', ' '], '', CONF_SITE_PHONE) ?>"><?= CONF_SITE_PHONE ?></a>
+                                <i class="fas fa-envelope"></i> <a class="white" href="mailto:<?= CONF_MAIL_SUPPORT ?>"><?= CONF_MAIL_SUPPORT ?></a>
                             </li>
                         </ul>
                     </div>

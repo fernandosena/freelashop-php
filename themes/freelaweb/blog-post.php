@@ -40,10 +40,12 @@
                     </div>
 
                     <!--twitter-->
-                    <a href="https://twitter.com/share?ref_src=site" class="twitter-share-button" data-size="large"
-                       data-text="<?= $post->title; ?>" data-url="<?= url("/blog/{$post->uri}"); ?>"
-                       data-via="<?= str_replace("@", "", CONF_SOCIAL_TWITTER_CREATOR); ?>"
-                       data-show-count="true">Tweet</a>
+                    <div class="btn-twitter">
+                        <a href="https://twitter.com/share?ref_src=site" class="twitter-share-button" data-size="large"
+                           data-text="<?= $post->title; ?>" data-url="<?= url("/blog/{$post->uri}"); ?>"
+                           data-via="<?= str_replace("@", "", CONF_SOCIAL_TWITTER_CREATOR); ?>"
+                           data-show-count="true">Tweet</a>
+                    </div>
                 </div>
             </aside>
         </div>

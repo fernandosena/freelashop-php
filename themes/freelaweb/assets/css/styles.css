@@ -1289,6 +1289,10 @@ input[type='checkbox'] {
 	overflow-x: auto;
 }
 
+.htmlchars iframe{
+	width: 100%;
+	height: 400px;
+}
 /*POST PAGE*/
 .post_page{
 	width: 70%;
@@ -1382,7 +1386,13 @@ input[type='checkbox'] {
 	margin-top: 10px;
 	font-size: var(--font-small);
 }
+.social_share_medias {
+	text-align: center;
+}
 
+.social_share_medias div {
+	display: inline-flex;
+}
 @media (max-width: 62em) {
 	.blog_article {
 		flex-basis: calc(50% - 40px);
@@ -1723,7 +1733,7 @@ input[type='checkbox'] {
 	margin-bottom: 3rem;
 }
 
-.header h1 {
+.header h2 {
 	margin-bottom: 1rem;
 	color: var(--color-white);
 	font-size: 2.5rem;
@@ -2740,6 +2750,9 @@ a:hover.back-to-top {
 	.post_page{
 		width: 100%
 	}
+	.htmlchars iframe{
+		height: 300px;
+	}
 }
 /* Min-width width 768px */
 @media (min-width: 768px) {
@@ -2764,7 +2777,7 @@ a:hover.back-to-top {
 		margin-bottom: 4rem;
 	}
 
-	.header h1 {
+	.header h2 {
 		font-size: 3.5rem;
 		line-height: 4.125rem;
 	}

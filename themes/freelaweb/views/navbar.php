@@ -10,9 +10,6 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="<?= url(); ?>">HOME <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link page-scroll" href="<?= url("/sobre"); ?>">SOBRE</a>
                 </li>
                 <li class="nav-item">

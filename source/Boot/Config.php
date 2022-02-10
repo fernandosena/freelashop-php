@@ -18,8 +18,7 @@ define("CONF_URL_TEST", "http://localhost/freelashop");
  */
 define("CONF_SITE_NAME", "FreelaShop");
 define("CONF_SITE_TITLE", "Contrate ou seja um profissional freelancer");
-define("CONF_SITE_DESC", "Contrate um profissional de qualidade para realizar o seu projeto de forma rápida e barata, ou trabalhe como freelancer
- em nossa plataforma hoje mesmo.");
+define("CONF_SITE_DESC", "Contrate um profissional de qualidade para realizar o seu projeto ou trabalhe hoje mesmo como um freelancer aqui no ".CONF_SITE_NAME.".");
 define("CONF_SITE_LANG", "pt_BR");
 define("CONF_SITE_CNPJ", "44.920.388/0001-14");
 define("CONF_SITE_DOMAIN", "freelashop.com.br");
@@ -135,7 +134,7 @@ define("CONF_TELEGRAM_CHANNEL", "-1001666062093");
 /**
  * GETNET
  */
-define("CONF_PAY_SANDBOX", true);
+define("CONF_PAY_SANDBOX", false);
 define("CONF_PAY_KEY_PUB_PROD", "pk_956xB0jC7HrWwzoK");
 define("CONF_PAY_KEY_SECRET_PROD", "sk_EG0pZlFDZh349Deg");
 

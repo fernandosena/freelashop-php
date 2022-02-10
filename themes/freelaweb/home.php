@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <h1>Realize seu sonho conosco ;)</h1>
+                        <h2>Realize seu sonho conosco ;)</h2>
                         <p class="p-large">Crie agora mesmo um projeto e tire o seu sonho do papel.</p>
                         <a class="btn-solid-lg page-scroll" href="<?= url("/criar-projeto") ?>">CRIAR PROJETO</a>
                     </div> <!-- end of text-container -->
@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-xl-7">
                     <div class="image-container">
                         <div class="img-wrapper">
-                            <img class="img-fluid" src="<?= image(theme("/assets/images/header-software-app.png"), 630) ?>" alt="alternative">
+                            <img class="img-fluid" src="<?= image(theme("/assets/images/freelashop-banner-principal.png"), 630) ?>" alt="freelashop-banner-head">
                         </div> <!-- end of img-wrapper -->
                     </div> <!-- end of image-container -->
                 </div> <!-- end of col -->
@@ -152,13 +152,13 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="image-container">
-                                    <img class="img-fluid img-painel" src="<?= image(theme("/assets/images/capa-contratante.jpg"), 500)?>" alt="alternative">
+                                    <img class="img-fluid img-painel" src="<?= image(theme("/assets/images/freelashop-capa-contratante.jpg"), 500)?>" alt="freelashop-capa-contratante">
                                 </div> <!-- end of image-container -->
                             </div> <!-- end of col -->
                             <div class="col-lg-6">
                                 <div class="text-container">
                                     <h3>Encontre o freelancer perfeito</h3>
-                                    <p>É a sua primeira vez na <?= CONF_SITE_NAME?>? então aprenda a como publicar um
+                                    <p>É a sua primeira vez na <?= CONF_SITE_NAME?>? Então aprenda a como publicar um
                                         trabalho e ter acesso às propostas dos freelancers para tirar o seu sonho do papel.
                                         <a class="blue page-scroll" href="<?= url("/cadastrar") ?>">Cadastre-se</a>
                                         e tenha em suas mãos as vantagens e a segurança que nenhum outro site de freelancer
@@ -192,7 +192,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="image-container">
-                                    <img class="img-fluid img-painel" src="<?= image(theme("/assets/images/capa-freelancer.jpg"), 500)?>" alt="alternative">
+                                    <img class="img-fluid img-painel" src="<?= image(theme("/assets/images/freelashop-capa-freelancer.jpg"), 500)?>" alt="freelashop-capa-freelancer">
                                 </div> <!-- end of image-container -->
                             </div> <!-- end of col -->
                             <div class="col-lg-6">
@@ -273,7 +273,7 @@
                 <div class="image-container">
                     <div class="video-wrapper">
                         <a class="popup-youtube" href="https://www.youtube.com/watch?v=<?= $video ?>" data-effect="fadeIn">
-                            <img class="img-fluid" src="<?= image(theme("/assets/images/video-image.png"), 850)?>" alt="alternative">
+                            <img class="img-fluid" src="<?= image(theme("/assets/images/freelashop-video-image.png"), 850)?>" alt="freelashop-video-image">
                             <span class="video-play-button">
                                 <span></span>
                             </span>
@@ -308,12 +308,12 @@ endif;
                                 <!-- Slide -->
                                 <div class="swiper-slide">
                                     <div class="image-wrapper">
-                                        <img class="img-fluid" src="<?= image(theme($deposition->user()->photo), 150) ?>" alt="alternative">
+                                        <img class="img-fluid" src="<?= image(theme($deposition->user()->photo), 150) ?>" alt="<?= $deposition->user()->fullName() ?>">
                                     </div> <!-- end of image-wrapper -->
                                     <div class="text-wrapper">
                                         <div class="testimonial-text"><?= $deposition->text ?></div>
                                         <div class="testimonial-author">
-                                            <?= "{$deposition->user()->first_name} {$deposition->user()->last_name}"?> -
+                                            <?= "{$deposition->user()->fullName()}"?> -
                                             <?= $deposition->user()->profission()->name ?></div>
                                     </div> <!-- end of text-wrapper -->
                                 </div> <!-- end of swiper-slide -->
