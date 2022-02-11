@@ -304,15 +304,16 @@ class Web extends Controller
      */
     public function subcategory(array $data): void
     {
-        $data = filter_var_array($data, FILTER_VALIDATE_INT);
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+        $categoryId = (new Category())->findByUri($data["id"]);
+        $categoryId = $categoryId->id;
 
-        $subCategory = (new SubCategory())->find("category_id = :c", "c={$data["id"]}");
+        $subCategory = (new SubCategory())->find("category_id = :c", "c={$categoryId}");
         $select = "";
-
         if($subCategory->count()){
             $select .= "<option value='' disabled selected>&ofcir; Selecione uma subcategoria</option>";
             foreach ($subCategory->fetch(true) as $category) {
-                $select .= "<option value='{$category->data()->id}'>&ofcir; {$category->data()->title}</option>";
+                $select .= "<option value='{$category->data()->uri}'>&ofcir; {$category->data()->title}</option>";
             }
         }else{
             $select .= "<option value='' disabled selected>&ofcir; Nenhuma subcategoria encontrada</option>";

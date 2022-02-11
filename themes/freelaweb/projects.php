@@ -17,7 +17,7 @@
                                 <select id="inputCategoryForm" class="form-control inputCategoryForm" data-url="<?= url("/subcategoria") ?>" name="category" style="width: 100%;">
                                     <option value="all" disabled selected> &ofcir;Selecione uma categoria</option>
                                     <?php foreach ($categories as $category): ?>
-                                        <option value="<?= $category->id ?>"
+                                        <option value="<?= $category->uri ?>"
                                             <?= (!empty($filter->category) && $filter->category == $category->id ? "selected" : ""); ?>
                                         >&ofcir; <?= $category->title ?></option>
                                     <?php endforeach; ?>

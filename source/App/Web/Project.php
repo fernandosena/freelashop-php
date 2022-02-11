@@ -13,6 +13,7 @@ use Source\Models\Category;
 use Source\Models\FreelaApp\AppBudget;
 use Source\Models\FreelaApp\AppContract;
 use Source\Models\FreelaApp\AppProject;
+use Source\Models\SubCategory;
 use Source\Models\User;
 use Source\Support\Message;
 use Source\Support\Pager;
@@ -69,6 +70,7 @@ class Project extends Web
      */
     public function search(array $data): void
     {
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
         if (!empty($data['search'])){
             $category = str_search($data['category']);
             $subcategory = str_search($data['subcategory']);
@@ -94,13 +96,25 @@ class Project extends Web
         }
 
         $head = $this->seo->render(
-            "Pesquisar projeto - " . CONF_SITE_NAME,
+            "Projetos - " . CONF_SITE_NAME,
             "Confira os resultados de sua pesquisa",
             url("/projetos/buscar/{$category}/{$subcategory}/{$terms}/{$type}/{$page}"),
             theme("/assets/images/share.jpg")
         );
 
-        $category = ($category != "all" ? "AND category_id = '$category'": null);
+        if($category != "all"){
+            $category = (new Category())->findByUri($category);
+            $categoryTitle = $category->title;
+            $category = $category->id;
+        }
+
+        if($subcategory != "all"){
+            $subcategory = (new SubCategory())->findByUri($subcategory);
+            $subcategoryTitle = "/ ".$subcategory->title;
+            $subcategory = $subcategory->id;
+        }
+
+        $category = ($category != "all" ? "AND category_id = '{$category}'": null);
         $subcategory = ($subcategory != "all" ? "AND subcategory_id = '$subcategory'" : null);
         $terms = ($terms != "all" ? "AND MATCH(title, content) AGAINST('$terms')" : null);
         $type = ($type != "all" ? "AND type = '$type'" : null);
@@ -110,7 +124,7 @@ class Project extends Web
         if (!$projectSearch->count()) {
             echo $this->view->render("projects", [
                 "head" => $head,
-                "title" => "PROJETO",
+                "title" => "Projetos ".($categoryTitle ?? null)." ".($subcategoryTitle ?? null),
                 "categories" => (new Category())
                     ->find("type = :type", "type=project")
                     ->fetch(true),
@@ -130,7 +144,7 @@ class Project extends Web
 
         echo $this->view->render("projects", [
             "head" => $head,
-            "title" => "PROJETO",
+            "title" => "Projetos",
             "categories" => (new Category())
                 ->find("type = :type", "type=project")
                 ->fetch(true),

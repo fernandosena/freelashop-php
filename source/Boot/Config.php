@@ -134,7 +134,7 @@ define("CONF_TELEGRAM_CHANNEL", "-1001666062093");
 /**
  * GETNET
  */
-define("CONF_PAY_SANDBOX", false);
+define("CONF_PAY_SANDBOX", true);
 define("CONF_PAY_KEY_PUB_PROD", "pk_956xB0jC7HrWwzoK");
 define("CONF_PAY_KEY_SECRET_PROD", "sk_EG0pZlFDZh349Deg");
 

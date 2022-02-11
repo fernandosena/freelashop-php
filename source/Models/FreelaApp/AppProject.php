@@ -44,9 +44,12 @@ class AppProject extends Model
     public function register(int $userId, array $data): ?AppProject
     {
         try{
+            $seachCategory = (new Category())->findByUri($data["category"]);
+            $seachSubategory = (new SubCategory())->findByUri($data["subcategory"]);
+
             $this->author = $userId;
-            $this->category_id = $data["category"];
-            $this->subcategory_id = $data["subcategory"];
+            $this->category_id = $seachCategory->id;
+            $this->subcategory_id = $seachSubategory->id;
             $this->title = $data["title"];
             $this->uri = str_slug($data["title"] . "-" . uniqid(rand()));
             $this->content = nl2br(str_textarea($data["content"]));

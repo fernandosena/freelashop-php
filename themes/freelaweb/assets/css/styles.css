@@ -1250,6 +1250,8 @@ input[type='checkbox'] {
 
 .htmlchars ul,
 .htmlchars ol {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
 	margin: 20px 0 20px 40px;
 }
 

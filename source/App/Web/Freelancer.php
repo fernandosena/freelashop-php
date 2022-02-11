@@ -62,15 +62,16 @@ class Freelancer extends Web
      */
     public function search(array $data): void
     {
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
         if (!empty($data['search'])){
-            $category = str_search($data['category']);
+            $category = $data['category'];
             $terms = str_search($data['terms']);
 
             echo json_encode(["redirect" => url("/freelancers/buscar/{$category}/{$terms}/1")]);
             return;
         }
 
-        $category = str_search($data['category']);
+        $category = $data['category'];
         $terms = str_search($data['terms']);
 
         $page = (filter_var($data['page'], FILTER_VALIDATE_INT) >= 1 ? $data['page'] : 1);
@@ -80,15 +81,19 @@ class Freelancer extends Web
         }
 
         $head = $this->seo->render(
-            "Pesquisa freelancer - " . CONF_SITE_NAME,
-            "Confira os resultados de sua pesquisa dos freelancers",
+            "Freelancer - " . CONF_SITE_NAME,
+            "Confira os resultados de sua pesquisa de freelancers",
             url("/freelancers/buscar/{$category}/{$terms}/{$page}"),
             theme("/assets/images/share.jpg")
         );
 
-        $category = ($category != "all" ? "AND category_id = '$category'": null);
-        $terms = ($terms != "all" ? "AND MATCH(first_name, last_name, email) AGAINST('$terms')" : null);
+        $categoryFind = (new Category())->findByUri($category);
+        $category = null;
+        if($categoryFind){
+            $category = ($category != "all" ? "AND category_id = '{$categoryFind->id}'": null);
+        }
 
+        $terms = ($terms != "all" ? "AND MATCH(first_name, last_name, email) AGAINST('$terms')" : null);
         $freelancerSearch = (new User())->findFreelancer("{$category} {$terms}");
 
         if (!$freelancerSearch->count()) {
@@ -101,7 +106,7 @@ class Freelancer extends Web
                     "category" => ($data["category"] != "all" ? $data["category"]: null),
                     "terms" => ($data["terms"] != "all" ? $data["terms"]: null)
                 ],
-                "title" => "FREELANCERS",
+                "title" => "freelancer ".($categoryFind->title ?? null),
                 "message"=> message()->warning("Sua pesquisa não retornou nenhum resultado")->render()
             ]);
             return;
@@ -112,7 +117,7 @@ class Freelancer extends Web
 
         echo $this->view->render("freelancers", [
             "head" => $head,
-            "title" => "PESQUISA FREELANCER",
+            "title" => "Freelancer",
             "categories" => (new Category())
                 ->find("type = :type", "type=project")
                 ->fetch(true),
@@ -152,45 +157,4 @@ class Freelancer extends Web
         ]);
     }
 
-    /**
-     * @param array|null $data
-     */
-//    public function freelancers(?array $data): void
-//    {
-//        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
-//
-//        $head = $this->seo->render(
-//            "Freelancers - " . CONF_SITE_NAME,
-//            CONF_SITE_DESC,
-//            url("/freelancers"),
-//            theme("/assets/images/share.jpg")
-//        );
-//
-//        $projects = (new AppProject())->filter($data ?? null);
-//        $pager = new Pager(url("/app/all/"));
-//        $pager->pager($projects->count(), 12, (!empty($data["page"]) ? $data["page"] : 1));
-//
-//        echo $this->view->render("freelancers", [
-//            "head" => $head,
-//            "title" => "Projetos",
-//            "projects" => $projects->limit($pager->limit())
-//                ->offset($pager->offset())
-//                ->order("created_at DESC")
-//                ->fetch(true),
-//            "paginator" => $pager->render(),
-//            "categories" => (new Category())
-//                ->find("type = :type", "type=project")
-//                ->fetch(true),
-//            "filter" => (object) [
-//                "category" => ($data["category"] ?? null),
-//                "subcategory" => ($data["subcategory"] ?? null),
-//                "terms" => ($data["terms"] ?? null),
-//                "type" => ($data["type"] ?? null)
-//            ],
-//            "message" =>(new Message())
-//                ->warning("Nenhum freelancer ainda disponivel")
-//                ->before("Que pena! ")
-//                ->after(", Tente novamente mais tarde")
-//        ]);
-//    }
 }

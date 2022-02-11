@@ -57,7 +57,7 @@
                             <select id="inputCategoryForm" data-url="<?= url("/subcategoria") ?>" name="category" class="form-control inputCategoryForm" placeholder="Selecione uma categoria" required>
                                 <option value="" disabled selected>&ofcir;  Selecione uma categoria</option>
                                 <?php foreach ($categories as $categorie): ?>
-                                    <option value="<?= $categorie->id ?>" <?= $select($categorie->id) ?>>&ofcir; <?= $categorie->title ?></option>
+                                    <option value="<?= $categorie->uri ?>" <?= $select($categorie->id) ?>>&ofcir; <?= $categorie->title ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback">Campo Obrigatório</div>
