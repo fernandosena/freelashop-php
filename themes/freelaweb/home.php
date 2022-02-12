@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <h2>Realize seu sonho conosco ;)</h2>
+                        <h1>Realize seu sonho com a <?= CONF_SITE_NAME ?> ;)</h1>
                         <p class="p-large">Crie agora mesmo um projeto e tire o seu sonho do papel.</p>
                         <a class="btn-solid-lg page-scroll" href="<?= url("/criar-projeto") ?>">CRIAR PROJETO</a>
                     </div> <!-- end of text-container -->

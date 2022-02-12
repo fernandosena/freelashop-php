@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Image Logo -->
         <a class="navbar-brand logo-text" href="<?= url(); ?>">
-            <h1><?= CONF_SITE_NAME ?></h1>
+            <h2 class="logo"><?= CONF_SITE_NAME ?></h2>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

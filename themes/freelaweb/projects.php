@@ -18,7 +18,7 @@
                                     <option value="all" disabled selected> &ofcir;Selecione uma categoria</option>
                                     <?php foreach ($categories as $category): ?>
                                         <option value="<?= $category->uri ?>"
-                                            <?= (!empty($filter->category) && $filter->category == $category->id ? "selected" : ""); ?>
+                                            <?= (!empty($filter->category) && $filter->category == $category->uri ? "selected" : ""); ?>
                                         >&ofcir; <?= $category->title ?></option>
                                     <?php endforeach; ?>
                                 </select>

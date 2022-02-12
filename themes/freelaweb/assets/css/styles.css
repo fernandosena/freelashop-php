@@ -182,12 +182,11 @@ textarea{
 	font: var(--weight-normal) 0.875rem/1.5rem var(--font-family-default);
 }
 
-h1 {
+h1, h2.logo {
 	color: var(--color-text-title);
 	font: var(--weight-bold) 2.5rem/3.125rem var(--font-family-default);
 	letter-spacing: -0.2px;
 }
-
 h2 {
 	color: var(--color-text-title);
 	font: var(--weight-bold) 2rem/2.625rem var(--font-family-default);
@@ -1735,7 +1734,7 @@ input[type='checkbox'] {
 	margin-bottom: 3rem;
 }
 
-.header h2 {
+.header h1 {
 	margin-bottom: 1rem;
 	color: var(--color-white);
 	font-size: 2.5rem;
@@ -2779,7 +2778,7 @@ a:hover.back-to-top {
 		margin-bottom: 4rem;
 	}
 
-	.header h2 {
+	.header h1 {
 		font-size: 3.5rem;
 		line-height: 4.125rem;
 	}
