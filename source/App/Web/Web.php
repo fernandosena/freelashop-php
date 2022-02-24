@@ -181,7 +181,7 @@ class Web extends Controller
             "data" => (object)[
                 "title" => "Falta pouco! Confirme seu cadastro.",
                 "desc" => "Enviamos um link de confirmação para seu e-mail. Acesse e siga as instruções para concluir seu cadastro e comece a criar seus projetos com o ".CONF_SITE_NAME,
-                "image" => image(theme("/assets/images/optin-confirm.jpg"), 500)
+                "image" => image(theme("/assets/images/freelashop-optin-confirm.jpg"), 500)
             ],
             "top" => true
         ]);
@@ -246,7 +246,7 @@ class Web extends Controller
             "data" => (object)[
                 "title" => "Tudo pronto. Você já pode iniciar seu projeto :)",
                 "desc" => "Bem-vindo(a) ao seu sistema ".CONF_SITE_NAME.", vamos começar?",
-                "image" => image(theme("/assets/images/optin-success.jpg"), 500),
+                "image" => image(theme("/assets/images/freelashop-optin-success.jpg"), 500),
                 "link" => url("/entrar"),
                 "linkTitle" => "Fazer Login"
             ],

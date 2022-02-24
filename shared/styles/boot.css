@@ -21,7 +21,7 @@
     --color-blue-calor: #559eeb;
     --color-yellow: #F5B946;
     --color-red: #D94352;
-    --color-purple: #5f4dee;
+    --color-purple: #673de6;
     --color-white: #ffffff;
     --color-dark-white: #f3f7fd;
     --color-gray: #777777;
@@ -42,7 +42,7 @@
     --hover-color-blue: #66D4F1;
     --hover-color-yellow: #FCD277;
     --hover-color-red: #F76C82;
-    --hover-color-purple: #656cee;
+    --hover-color-purple: #4d1de0;
     --hover-duration: 0.3s;
 
     --gradient-default: linear-gradient(to right, #5f4dee 0%, #559eeb 50%, #5f4dee 100%);

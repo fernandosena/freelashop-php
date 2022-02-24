@@ -8,13 +8,24 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="list-group" id="list-tab" role="tablist">
-                            <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Usuário</a>
+                            <a class="list-group-item list-group-item-action active" id="list-afiliado-list" data-bs-toggle="list" href="#list-afiliado" role="tab" aria-controls="list-afiliado">Afiliado</a>
+                            <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Usuário</a>
                             <a class="list-group-item list-group-item-action" id="list-config-list" data-bs-toggle="list" href="#list-config" role="tab" aria-controls="list-config">Alterar conta</a>
                         </div>
                     </div>
                     <div class="col-9">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                            <div class="tab-pane fade show active" id="list-afiliado" role="tabpanel" aria-labelledby="list-afiliado-list">
+                                <p>
+                                    Compartilhe seu link de afiliado e ganhe dinheiro com isso.</p>
+                                <p>
+                                    A cada transição realizada com sucesso por quem se cadastradou atravez de seu link
+                                    você receba pontos e consegue trocar por dinheiro ou descontos na <?= CONF_SITE_NAME ?>.
+
+                                </p>
+                                <p>Link de afiliado: <strong><?= url("/cadastrar/".base64_encode($user->email)."") ?></strong></p>
+                            </div>
+                            <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                                 <div class="app_formbox app_widget">
                                     <form class="app_form" action="<?= url("/app/perfil"); ?>" method="post">
                                         <input type="hidden" name="update" value="true"/>

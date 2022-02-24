@@ -48,7 +48,8 @@ class User extends Model
         string $cell,
         string $password,
         ?string $type = null,
-        ?string $document = null
+        ?string $document = null,
+        ?int $userId = null
     ): User {
         $this->first_name = $firstName;
         $this->last_name = $lastName;
@@ -57,6 +58,7 @@ class User extends Model
         $this->password = $password;
         $this->type = ($type == "freelancer") ? "freelancer" : "contractor";
         $this->document = $document;
+        $this->user_id = $userId;
         return $this;
     }
 

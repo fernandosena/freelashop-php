@@ -3,8 +3,8 @@
  * DATABASE
  */
 define("CONF_DB_HOST", "localhost");
-define("CONF_DB_USER", "u813134528_freelashop");
-define("CONF_DB_PASS", "Rede2050kl@");
+define("CONF_DB_USER", "root");
+define("CONF_DB_PASS", "");
 define("CONF_DB_NAME", "u813134528_freelashop");
 
 /**

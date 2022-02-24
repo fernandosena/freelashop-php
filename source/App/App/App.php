@@ -126,7 +126,6 @@ class App extends Controller
      */
     public function profile(?array $data): void
     {
-
         if (!empty($data["update"])) {
             list($d, $m, $y) = explode("/", $data["datebirth"]);
 

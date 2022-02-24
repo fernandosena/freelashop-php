@@ -112,8 +112,11 @@ class User extends Web
                 $data["email"],
                 $data["cell"],
                 $data["password"],
-                $data["type"]
+                $data["type"],
+                null,
+                $data["userID"]
             );
+
 
             if ($auth->register($user)) {
                 $json['redirect'] = url("/confirma");
@@ -132,8 +135,17 @@ class User extends Web
             theme("/assets/images/share.jpg")
         );
 
+        $userID = null;
+        if(!empty($data["base64_email"])){
+            $verificaUser = (new \Source\Models\User())->findByEmail(base64_decode($data["base64_email"]));
+            if($verificaUser){
+                $userID = $verificaUser->id;
+            }
+        }
+
         echo $this->view->render("auth-register", [
             "head" => $head,
+            "userID" => $userID,
             "noFooter" => true
         ]);
     }

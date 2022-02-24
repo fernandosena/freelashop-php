@@ -39,6 +39,7 @@ $route->get("/criar-projeto", "Project:action");
 
 $route->get("/entrar", "User:login");
 $route->get("/cadastrar", "User:register");
+$route->get("/cadastrar/{base64_email}", "User:register");
 $route->get("/recuperar", "User:forget");
 $route->get("/recuperar/{code}", "User:reset");
 

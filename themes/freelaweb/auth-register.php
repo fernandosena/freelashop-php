@@ -24,6 +24,7 @@
                             <form class="auth_form" action="<?= url("/cadastrar"); ?>" method="post" data-toggle="validator" data-focus="false">
                                 <div class="ajax_response"><?= flash(); ?></div>
                                 <input type="hidden" value="<?= session()->csrf_token; ?>" name="csrf" required>
+                                <input type="hidden" value="<?= ($userID ?? null)?>" name="userID" required>
                                 <input type="hidden" value="contractor" name="type" required>
                                 <div class="form-group">
                                     <input type="text" autocomplete="off" class="form-control-input" id="snome" name="first_name" required>
@@ -67,6 +68,7 @@
                             <form class="auth_form" action="<?= url("/cadastrar"); ?>" method="post" data-toggle="validator" data-focus="false">
                                 <div class="ajax_response"><?= flash(); ?></div>
                                 <input type="hidden" value="<?= session()->csrf_token; ?>" name="csrf" required>
+                                <input type="hidden" value="<?= ($userID ?? null)?>" name="userID" required>
                                 <input type="hidden" value="freelancer" name="type" required>
                                 <div class="form-group">
                                     <input type="text" autocomplete="off" class="form-control-input" id="snome" name="first_name" required>
