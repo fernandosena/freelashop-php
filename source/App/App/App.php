@@ -7,6 +7,7 @@ use Source\Core\Session;
 use Source\Core\View;
 use Source\Models\Auth;
 use Source\Models\FreelaApp\AppProject;
+use Source\Models\FreelaApp\AppScore;
 use Source\Models\Report\Access;
 use Source\Models\Report\Online;
 use Source\Models\User;
@@ -223,7 +224,10 @@ class App extends Controller
                 "full"=>abs($project->full),
                 "accepted"=>abs($project->accepted),
                 "concluded"=>abs($project->concluded)
-            ]
+            ],
+            "score" => (new AppScore())->find("user_id = :user_id", "user_id={$this->user->id}")
+                ->order("created_at")
+                ->fetch(true)
         ]);
     }
 

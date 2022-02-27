@@ -32,6 +32,14 @@ define("CONF_SITE_ADDR_CITY", "São Paulo");
 define("CONF_SITE_ADDR_STATE", "SP");
 define("CONF_SITE_ADDR_ZIPCODE", "05207130");
 
+/**
+ * SCORE
+ */
+define("CONF_SCORE", [
+    "USER" => [
+        "CREATE" => 2
+    ]
+]);
 
 /**
  * PROJECT

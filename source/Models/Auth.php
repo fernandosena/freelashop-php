@@ -5,6 +5,7 @@ namespace Source\Models;
 use Source\Core\Model;
 use Source\Core\Session;
 use Source\Core\View;
+use Source\Models\FreelaApp\AppScore;
 use Source\Support\Email;
 use Source\Support\Log;
 

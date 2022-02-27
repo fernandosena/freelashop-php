@@ -9,6 +9,7 @@
                     <div class="col-3">
                         <div class="list-group" id="list-tab" role="tablist">
                             <a class="list-group-item list-group-item-action active" id="list-afiliado-list" data-bs-toggle="list" href="#list-afiliado" role="tab" aria-controls="list-afiliado">Afiliado</a>
+                            <a class="list-group-item list-group-item-action" id="list-score-list" data-bs-toggle="list" href="#list-score" role="tab" aria-controls="score-home">Pontos</a>
                             <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Usuário</a>
                             <a class="list-group-item list-group-item-action" id="list-config-list" data-bs-toggle="list" href="#list-config" role="tab" aria-controls="list-config">Alterar conta</a>
                         </div>
@@ -24,6 +25,74 @@
 
                                 </p>
                                 <p>Link de afiliado: <strong><?= url("/cadastrar/".base64_encode($user->email)."") ?></strong></p>
+                                <a class="shared" href="https://www.facebook.com/sharer/sharer.php?u=<?= url("/cadastrar/".base64_encode($user->email)."") ?>">
+                                    <i class="fa-brands fa-facebook-square"></i>
+                                </a>
+                                <a class="shared"  href="https://www.linkedin.com/shareArticle?mini=true&url=<?= url("/cadastrar/".base64_encode($user->email)."") ?>">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </a>
+                                <a class="shared"  href="https://api.whatsapp.com/send?text=<?= url("/cadastrar/".base64_encode($user->email)."") ?>">
+                                    <i class="fa-brands fa-whatsapp-square"></i>
+                                </a>
+                                <a class="shared"  href="javascript:void(0)" onclick="share()"> <i class="fa-solid fa-share-from-square"></i></a>
+                                <script type="text/javascript">
+                                    function share(){
+                                        if (navigator.share !== undefined) {
+                                            navigator.share({
+                                                title: 'Ganhe dinheiro comigo',
+                                                text: 'Use o meu link e ganhe dinheiro todo dia na <?= CONF_SITE_NAME ?>, Meu link: <?= url("/cadastrar/".base64_encode($user->email)."") ?>',
+                                                url: '<?= url("/cadastrar/".base64_encode($user->email)."") ?>',
+                                            })
+                                                .then(() => console.log('Successful share'))
+                                        .catch((error) => console.log('Error sharing', error));
+                                        }
+                                    }
+                                </script>
+                            </div>
+                            <div class="tab-pane fade" id="list-score" role="tabpanel" aria-labelledby="list-score-list">
+                                <?php
+                                    if($score){
+                                ?>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <!-- /.card-header -->
+                                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                                    <table class="table table-head-fixed text-nowrap">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Data</th>
+                                                            <th>Pontos</th>
+                                                            <th>Comentário</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <?php
+                                                            foreach ($score as $item) {
+                                                        ?>
+                                                            <tr>
+                                                                <td><?= $item->id ?></td>
+                                                                <td><?= date_fmt_br($item->created_at) ?></td>
+                                                                <td><?= $item->value ?> Ponto(s)</td>
+                                                                <td><?= $item->comment ?></td>
+                                                            </tr>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.card-body -->
+                                            </div>
+                                            <!-- /.card -->
+                                        </div>
+                                    </div>
+                                <?php
+                                    }else{
+                                        echo message()->info("Você ainda não tem pontos ACUMULADOS");
+                                    }
+                                ?>
                             </div>
                             <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                                 <div class="app_formbox app_widget">

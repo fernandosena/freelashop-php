@@ -8,6 +8,7 @@ use Source\Models\Category;
 use Source\Models\Faq\Channel;
 use Source\Models\Faq\Question;
 use Source\Models\FreelaApp\AppDepositions;
+use Source\Models\FreelaApp\AppScore;
 use Source\Models\Newsletter;
 use Source\Models\FreelaApp\AppProject;
 use Source\Models\Post;
@@ -219,6 +220,14 @@ class Web extends Controller
         if ($user && $user->status != "confirmed") {
             $user->status = "confirmed";
             $user->save();
+
+            if(!empty($user->user_id)){
+                $score = (new AppScore());
+                $score->user_id = $user->user_id;
+                $score->value = CONF_SCORE["USER"]["CREATE"];
+                $score->comment = "Ativação do usuário {$user->first_name}";
+                $score->save();
+            }
 
             $subject = "E-mail confirmado com sucesso";
             (new Email())->bootstrap(

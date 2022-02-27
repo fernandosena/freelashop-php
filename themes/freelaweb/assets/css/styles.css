@@ -48,7 +48,7 @@ html {
 
 body, p {
 	color: var(--color-text);
-	font: var(--weight-normal) 1rem/1.625rem var(--font-family-default);
+	font: var(--weight-normal) 19px var(--font-family-default);
 }
 #service-contract{
 	overflow-y: scroll !important;
@@ -85,7 +85,17 @@ body, p {
 	color: var(--color-white);
 	border-radius: 7px 7px 0 0;
 }
+a.shared{
+	margin-right: 10px;
+	text-decoration: none;
+}
+a.shared:hover{
+	text-decoration: none;
+}
 
+a.shared i{
+	font-size: 30px;
+}
 figure.image-user{
 	position: relative;
 	margin: 0 auto;
@@ -428,7 +438,7 @@ a.white {
 	padding-top: 1.0625rem;
 	padding-bottom: 0.0625rem;
 	padding-left: 1.25rem;
-	border: 1px solid #c4d8dc;
+	border: 1px solid var(--color-gray);
 	border-radius: 0.25rem;
 	background-color: var(--color-white);
 	color: var(--color-text);
@@ -437,10 +447,10 @@ a.white {
 	-webkit-appearance: none; /* removes inner shadow on form inputs on ios safari */
 }
 
+.form-control,
 .form-control-select {
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
-	height: 3rem;
+	border: 1px solid var(--color-gray);
+	margin-top: 5px;
 }
 
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */

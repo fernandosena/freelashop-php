@@ -11,7 +11,7 @@
     --font-max: 2em;
 
     /*FONT FAMILY*/
-    --font-family-default: Montserrat, sans-serif;
+    --font-family-default: 'Roboto', sans-serif;
 
     /*COLOR*/
     --color-default: var(--color-purple);
@@ -29,7 +29,7 @@
 
     /*TEXT*/
     --color-text-bg: var(--color-dark-white);
-    --color-text: var(--color-gray);
+    --color-text: var(--color-black);
     --color-text-title: var(--color-dark-grey);
 
     --weight-light: 300;
