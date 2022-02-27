@@ -229,7 +229,7 @@ h6 {
 
 .above-heading {
 	color: var(--color-default);
-	font: var(--weight-bold) 0.75rem/0.875rem var(--font-family-default);
+	font: var(--weight-bold) 17px var(--font-family-default);
 	text-align: center;
 }
 
