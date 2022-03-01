@@ -26,7 +26,7 @@
 <!-- end of header -->
 
 <!-- Description -->
-<div class="cards-1">
+<div class="cards-1 mt-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -92,8 +92,42 @@
 </div> <!-- end of cards-1 -->
 <!-- end of description -->
 
+<div id="details" class="basic-1 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="text-container">
+                    <h2>Ganhe dinheiro compartilhando seu link de afiliado</h2>
+                    <p>Entre na pagina de <a href="<?= url("/app/perfil")?>">Perfil</a> e na aba afiliado, compratilhe seu link com seus amigos para você conseguir juntar pontos e trocar por dinheiro ou descontos na platafrma</p>
+                    <h4>Ganho pontos quando meu amigo:</h4>
+                    <ul class="list-unstyled li-space-lg">
+                        <li class="media">
+                            <div class="media-body"><i class="fas fa-square"></i> Se cadastra e confirma o e-mail</div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body"><i class="fas fa-square"></i> Contrata um freelancer na plataforma</div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body"><i class="fas fa-square"></i> Trabalha em um projeto como freelancer</div>
+                        </li>
+                        <li class="media">
+                            <div class="media-body"><i class="fas fa-square"></i> Assina o plano PREMIUM</div>
+                        </li>
+                    </ul>
+                    <a class="btn-solid-reg page-scroll" href="<?= url("/app/perfil")?>">MEU LINK DE AFILIADO</a>
+                </div> <!-- end of text-container -->
+            </div> <!-- end of col -->
+            <div class="col-lg-6">
+                <div class="image-container">
+                    <img class="img-fluid" src="<?= image(theme("/assets/images/freelashop-afiliado.jpg"), 500)?>" alt="Afiliado">
+                </div> <!-- end of image-container -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div>
+
 <?php if(!empty($categories)): ?>
-    <div id="card-category" class="mt-7 mb-7">
+    <div id="card-category" class="freelancers-category mt-5">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-12">
@@ -104,7 +138,7 @@
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 <?php foreach($categories as $category): ?>
                     <div class="col">
-                        <a href="<?= url("/freelancers/buscar/{$category->id}/all/1") ?>" style="text-decoration: none">
+                        <a href="<?= url("/freelancers/buscar/{$category->uri}/all/1") ?>" style="text-decoration: none">
                             <div class="card h-100">
                                 <img src="<?= image($category->cover, 300) ?>" class="card-img-top" alt="<?= $category->title ?>">
                                 <div class="card-body text-center">
@@ -121,7 +155,7 @@
 <?php endif; ?>
 
 <!-- Features -->
-<div id="features" class="tabs">
+<div id="features" class="tabs mt-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -237,7 +271,7 @@
 <!-- end of features -->
 
 <?php if(!empty($posts)): ?>
-    <div id="card-category" class="mt-7 mb-7">
+    <div id="card-category" class="mt-7">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-12">
