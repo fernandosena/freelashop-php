@@ -297,9 +297,9 @@ a.white {
 .btn-solid-reg {
 	display: inline-block;
 	padding: 1.1875rem 2.125rem 1.1875rem 2.125rem;
-	border: 0.125rem solid var(--color-default);
+	border: 0.125rem solid var(--color-pink);
 	border-radius: 2rem;
-	background-color: var(--color-default);
+	background-color: var(--color-pink);
 	color: var(--color-white);
 	font: var(--weight-bold) 0.875rem/0 var(--font-family-default);
 	text-decoration: none;
@@ -307,8 +307,8 @@ a.white {
 }
 
 .btn-solid-reg:hover {
-	background-color: transparent;
-	color: var(--color-default);
+	background-color: var(--hover-color-pink);
+	color: var(--color-white);
 	text-decoration: none;
 }
 
@@ -353,11 +353,11 @@ a.white {
 	font: var(--weight-bold) 0.875rem/0 var(--font-family-default);
 }
 .btn-cadastrar{
-	background-color: var(--color-default);
+	background-color: var(--color-pink);
 	border-radius: 50px;
 	color: var(--color-white) !important;
 	font-weight: var(--weight-bold);
-	border: 2px solid var(--color-white);
+	border: 2px solid var(--color-pink);
 	font: var(--weight-bold) 0.875rem/0 var(--font-family-default);
 	padding: 15px;
 }
@@ -544,9 +544,9 @@ input[type='checkbox'] {
 	display: inline-block;
 	width: 100%;
 	height: 3.125rem;
-	border: 1px solid var(--color-default);
+	border: 1px solid var(--color-pink);
 	border-radius: 1.5rem;
-	background-color: var(--color-default);
+	background-color: var(--color-pink);
 	color: var(--color-white);
 	font: var(--weight-bold) 0.875rem/0 var(--font-family-default);
 	cursor: pointer;
@@ -554,8 +554,8 @@ input[type='checkbox'] {
 }
 
 .form-control-submit-button:hover {
-	background-color: transparent;
-	color: var(--color-default);
+	background-color: var(--hover-color-pink);
+	color: var(--color-white);
 }
 
 /* Form Success And Error Message Formatting */
@@ -1216,6 +1216,17 @@ input[type='checkbox'] {
 .blog_article a:hover {
 	text-decoration: underline;
 }
+.btn-padrao{
+	background-color: var(--color-pink);
+	padding: 20px;
+	color: var(--color-white) !important;
+	border-radius: 7px;
+	text-decoration: none !important;
+	text-transform: uppercase !important;
+}
+.btn-padrao:hover{
+	 background-color: var(--hover-color-pink);
+ }
 
 /*WYSH HTMLCHARS*/
 .htmlchars {
@@ -1272,7 +1283,7 @@ input[type='checkbox'] {
 .htmlchars ol {
 	font-family: var(--font-family-default);
 	font-size: 20px;
-	margin: 20px 0 20px 40px;
+	margin: 0;
 }
 
 .htmlchars ul {
@@ -1747,7 +1758,7 @@ input[type='checkbox'] {
 
 .header .header-content {
 	padding-top: 8rem;
-	padding-bottom: 4rem;
+	padding-bottom: 8rem;
 	text-align: center;
 }
 
@@ -1777,7 +1788,8 @@ input[type='checkbox'] {
 }
 
 .header .btn-solid-lg:hover {
-	background: transparent;
+	background-color: var(--color-pink);
+	border-color: var(--color-pink);
 	color: #f3f7fd;
 }
 
@@ -3109,7 +3121,7 @@ a:hover.back-to-top {
 	/* Header */
 	.header .header-content {
 		padding-top: 11rem;
-		padding-bottom: 5rem;
+		padding-bottom: 8rem;
 	}
 
 	.header .text-container {

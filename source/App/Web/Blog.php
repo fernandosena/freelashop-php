@@ -21,11 +21,72 @@ class Blog extends Web
      */
     public function blog(?array $data): void
     {
+        $schema = [
+            "@context" => "https://schema.org",
+            "@graph" => [
+                "@type" => "WebSite",
+                [
+                    "@id" => url("/blog")."/#website",
+                    "url" => url("/blog"),
+                    "name" => "Blog da ".CONF_SITE_NAME,
+                    "description" => "A Plataforma de Contratação de Freelancer da Próxima Geração",
+                    "potentialAction" => [
+                        [
+                            "@type" => "SearchAction",
+                            "target" => [
+                                "@type" => "EntryPoint",
+                                "urlTemplate" => url("/blog")."/?s=[search_term_string]"
+                            ],
+                            "query-input" => "required name=search_term_string"
+                        ]
+                    ],
+                    "inLanguage" => "pt-BR"
+                ],
+                [
+                    "@type" => "CollectionPage",
+                    "@id" => url("/blog")."/#website",
+                    "url" => url("/blog"),
+                    "name" => "Blog da ".CONF_SITE_NAME." - A Plataforma de Contratação de Freelancer da Próxima Geração",
+                    "isPartOf" => [
+                        "@id" => url("/blog")."/#website"
+                    ],
+                    "description" => "A Plataforma de Contratação de Freelancer da Próxima Geração",
+                    "breadcrumb" => [
+                        "@id" => url("/blog")."/#breadcrumb"
+                    ],
+                    "inLanguage" => "pt-BR",
+                    "potentialAction" => [
+                        [
+                            "@type" => "SearchAction",
+                            "target" => [
+                                url("/blog")
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    "@type" => "BreadcrumbList",
+                    "@id" => url("/blog")."/#breadcrumb",
+                    "itemListElement" => [
+                        [
+                            "@type" => "ListItem",
+                            "position" => 1,
+                            "name" => "Home",
+                            "item" => url()
+                        ]
+                    ]
+                ],
+            ]
+        ];
+
+
         $head = $this->seo->render(
             "Blog - " . CONF_SITE_NAME,
             "Confira em nosso blog dicas e sacadas de como controlar melhorar suas contas. Vamos tomar um café?",
             url("/blog"),
-            theme("/assets/images/share.jpg")
+            theme("/assets/images/share.jpg"),
+            true,
+            $schema
         );
 
         $blog = (new Post())->findPost();
@@ -132,6 +193,7 @@ class Blog extends Web
      */
     public function post(array $data): void
     {
+
         $post = (new Post())->findByUri($data['uri']);
         if (!$post) {
             redirect("/404");
@@ -142,11 +204,116 @@ class Blog extends Web
             $post->save();
         }
 
+        $schema = [
+            "@context" => "https://schema.org",
+            "@graph" => [
+                "@type" => "WebSite",
+                [
+                    "@id" => url("/blog")."/#website",
+                    "url" => url("/blog"),
+                    "name" => "Blog da ".CONF_SITE_NAME,
+                    "description" => "A Plataforma de Contratação de Freelancer da Próxima Geração",
+                    "potentialAction" => [
+                        [
+                            "@type" => "SearchAction",
+                            "target" => [
+                                "@type" => "EntryPoint",
+                                "urlTemplate" => url("/blog")."/?s=[search_term_string]"
+                            ],
+                            "query-input" => "required name=search_term_string"
+                        ]
+                    ],
+                    "inLanguage" => "pt-BR"
+                ],
+                [
+                    "@type" => "ImageObject",
+                    "@id" => url("/blog/{$post->uri}")."/#primaryimage",
+                    "inLanguage" => "pt-BR",
+                    "url" => ($post->cover ? image($post->cover, 1200, 628) : theme("/assets/images/share.jpg")),
+                    "contentUrl" => ($post->cover ? image($post->cover, 1200, 628) : theme("/assets/images/share.jpg")),
+                    "width" => 1200,
+                    "height" => 628
+                ],
+                [
+                    "@type" => "WebPage",
+                    "@id" => url("/blog/{$post->uri}")."/#webpage",
+                    "url" => url("/blog/{$post->uri}"),
+                    "name" => "O que é um Freelancer e Como Contratar Um - Blog ".CONF_SITE_NAME,
+                    "isPartOf" => [
+                        "@id" => url("/blog")."/#website"
+                    ],
+                    "primaryImageOfPage" => [
+                        "@id" => url("/blog/{$post->uri}")."/#primaryimage"
+                    ],
+                    "datePublished" => date("Y-m-d\TH:i:s+00:00", strtotime($post->created_at)),
+                    "dateModified" => date("Y-m-d\TH:i:s+00:00", strtotime($post->updated_at)),
+                    "author" => [
+                        "@id" => url("/blog/{$post->uri}")
+                    ],
+                    "description" => $post->subtitle,
+                    "breadcrumb" => [
+                        "@id" => url("/blog/{$post->uri}")."/#breadcrumb"
+                    ],
+                    "inLanguage" => "pt-BR",
+                    "potentialAction" => [
+                        [
+                            "@type" => "ReadAction",
+                            "target" => [
+                                url("/blog/{$post->uri}")
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    "@type" => "BreadcrumbList",
+                    "@id" => url("/blog/{$post->uri}")."/#breadcrumb",
+                    "itemListElement" => [
+                        [
+                            "@type" => "ListItem",
+                            "position" => 1,
+                            "name" => "Home",
+                            "item" => url()
+                        ],
+                        [
+                            "@type" => "ListItem",
+                            "position" => 2,
+                            "name" => $post->title
+                        ]
+                    ]
+                ],
+                [
+                    "@type" => "Person",
+                    "@id" => url(),
+                    "name" => "Fernando C. Sena",
+                    "image" => [
+                        "@type" => "ImageObject",
+                        "@id" => url("/blog")."/#personlogo",
+                        "inLanguage" => "pt-BR",
+                        "url" => "https://pt.gravatar.com/userimage/187532843/a60a8448b10755b29b6465e84f189e54.jpeg",
+                        "contentUrl" => "https://pt.gravatar.com/userimage/187532843/a60a8448b10755b29b6465e84f189e54.jpeg",
+                        "caption" => "Fernando C. Sena"
+                    ],
+                    "description" => "Fernando C Sena é estudante de Ciência da computação na Universidade Anhambi Morumbi, e trabalha como Desenvolvedor na Softhubo. Já trabalhou com infraestrutura, desenvolvimento de sites e sistemas webs. É apaixonada por tecnologia e agora demonstra sua paixão criando sites para seus clientes e projetos proprios com muito carinho. Nas horas vagas, Fernando ama ficar com seus dois gatos, ver séries (as sitcoms são suas favoritas). Um fato curioso sobre o autor => seu primeiro bichinho de estimação foi um cachorro, chamado Rabito igual a novela Carrocel do SBT.",
+                    "birthDate" => "1999-02-25",
+                    "gender" => "masculino",
+                    "knowsLanguage" => [
+                        "Português brasileiro",
+                        "Inglês"
+                    ],
+                    "jobTitle" => "Web Designer",
+                    "worksFor" => "Softhuo",
+                    "url" => url()
+                ]
+            ]
+        ];
+
         $head = $this->seo->render(
             "{$post->title} - " . CONF_SITE_NAME,
             $post->subtitle,
             url("/blog/{$post->uri}"),
-            ($post->cover ? image($post->cover, 1200, 628) : theme("/assets/images/share.jpg"))
+            ($post->cover ? image($post->cover, 1200, 628) : theme("/assets/images/share.jpg")),
+            true,
+            $schema
         );
 
         echo $this->view->render("blog-post", [

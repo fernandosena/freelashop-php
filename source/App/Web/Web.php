@@ -48,11 +48,36 @@ class Web extends Controller
      */
     public function home(): void
     {
+        $schema = [
+            "@context" => "http://schema.org",
+            "@type" => "WebSite",
+            "name" => CONF_SITE_NAME,
+            "alternateName" => CONF_SITE_NAME." Brasil",
+            "url" => url(),
+            "image" => [
+                "@type" => "ImageObject",
+                "url" => url("/storage/images/favicon.png"),
+                "height" => "400",
+                "width" => "400"
+            ],
+            "sameAs" => [
+                "https://www.facebook.com/".CONF_SOCIAL_PAGE["facebook"],
+                "https://twitter.com/".CONF_SOCIAL_PAGE["twitter"]
+            ],
+            "potentialAction" => [
+                "@type" => "SearchAction",
+                "target" => url()."/?query={search_term_string}",
+                "query-input" => "required name=search_term_string"
+            ]
+        ];
+
         $head = $this->seo->render(
             CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
             CONF_SITE_DESC,
             url(),
-            theme("/assets/images/share.jpg")
+            theme("/assets/images/share.jpg"),
+            true,
+            $schema
         );
 
 
@@ -71,6 +96,7 @@ class Web extends Controller
                         ->limit(8)
                         ->fetch(true)
         ]);
+
     }
 
     /**
@@ -78,11 +104,41 @@ class Web extends Controller
      */
     public function about(): void
     {
+        $schema = [
+            "@context" => "http://schema.org",
+            "@type" => "Organization",
+            "name" => CONF_SITE_NAME,
+            "alternateName" => "Contratação de freelancer ".CONF_SITE_NAME,
+            "foundingDate" => "2022",
+            "logo" => url("/storage/images/favicon.png"),
+            "image" =>  url("/storage/images/favicon.png"),
+            "url" => url("/sobre"),
+            "address" => [
+                "@type" => "PostalAddress",
+                "streetAddress" => CONF_SITE_ADDR_STREET.", ".CONF_SITE_ADDR_CITY." - ".CONF_SITE_ADDR_STATE.", ".CONF_SITE_ADDR_ZIPCODE,
+                "addressLocality" => CONF_SITE_ADDR_CITY,
+                "postalCode" => CONF_SITE_ADDR_ZIPCODE,
+                "addressCountry" => "BRA"
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "Sales",
+                "email" => "mailto:".CONF_SITE_EMAIL,
+                "url" => url()."#footer",
+            ],
+            "sameAs" => [
+                "https://www.facebook.com/".CONF_SOCIAL_PAGE["facebook"],
+                "https://twitter.com/".CONF_SOCIAL_PAGE["twitter"]
+            ],
+        ];
+
         $head = $this->seo->render(
-            "Descubra o " . CONF_SITE_NAME . " - " . CONF_SITE_DESC,
-            CONF_SITE_DESC,
+            "Saiba quem somos -  " . CONF_SITE_NAME,
+            "Desde o seu começo, em 2021, a missão da ".CONF_SITE_NAME." é oferecer serviços de comunicação que facilitam a vida dos freelancers e dos seus clientes.",
             url("/sobre"),
-            theme("/assets/images/share.jpg")
+            theme("/assets/images/share.jpg"),
+            true,
+            $schema
         );
 
         echo $this->view->render("about", [
@@ -104,8 +160,8 @@ class Web extends Controller
         $type = explode("/",substr($type, 1));
 
         $head = $this->seo->render(
-            "FAQ - ".ucfirst($type[1])." - ". CONF_SITE_NAME,
-            CONF_SITE_DESC,
+            "FAQ ".ucfirst($type[1])." - ". CONF_SITE_NAME,
+            "Dicas e respostas da Equipe Sucesso do Cliente. Contratação ou trabalhos. Tudo o que você precisa saber para criar, excluir, configurar, redirecionar. tudo isso para você ".ucfirst($type[1]),
             url("/faq/$type[1]"),
             theme("/assets/images/share.jpg")
         );

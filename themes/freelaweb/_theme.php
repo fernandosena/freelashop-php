@@ -7,6 +7,15 @@
         <meta name="author" content="<?= CONF_SITE_NAME ?>">
         <?= $head ?>
 
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5J6Q7GS2B7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-5J6Q7GS2B7');
+        </script>
         <!-- Favicon  -->
         <link rel="icon" type="image/png" href="<?= url("/storage/images/favicon.png"); ?>">
         <link href="<?= theme("/assets/style.css")?>" rel="stylesheet">

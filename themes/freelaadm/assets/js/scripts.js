@@ -229,7 +229,7 @@ tinyMCE.init({
     media_poster: false,
     media_alt_source: false,
     media_embed: false,
-    extended_valid_elements: "a[href|target=_blank|rel|class]",
+    extended_valid_elements: "a[href|target|rel|class]",
     imagemanager_insert_template: '<img src="{$url}" title="{$title}" alt="{$title}" />',
     image_dimensions: false,
     relative_urls: true,

@@ -34,14 +34,14 @@
                     <div class="fb-share-button" data-href="<?= url("/blog/{$post->uri}"); ?>" data-layout="button_count"
                          data-size="large"
                          data-mobile-iframe="true">
-                        <a target="_blank"
+                        <a rel="nofollow" target="_blank"
                            href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(url("/blog/{$post->uri}")); ?>"
                            class="fb-xfbml-parse-ignore">Compartilhar</a>
                     </div>
 
                     <!--twitter-->
                     <div class="btn-twitter">
-                        <a href="https://twitter.com/share?ref_src=site" class="twitter-share-button" data-size="large"
+                        <a rel="nofollow" href="https://twitter.com/share?ref_src=site" class="twitter-share-button" data-size="large"
                            data-text="<?= $post->title; ?>" data-url="<?= url("/blog/{$post->uri}"); ?>"
                            data-via="<?= str_replace("@", "", CONF_SOCIAL_TWITTER_CREATOR); ?>"
                            data-show-count="true">Tweet</a>

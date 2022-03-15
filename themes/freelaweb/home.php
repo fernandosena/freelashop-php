@@ -22,7 +22,6 @@
         </div> <!-- end of container -->
     </div> <!-- end of header-content -->
 </header> <!-- end of header -->
-<svg class="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style>.cls-1{fill: var(--color-default);}</style></defs><path class="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z"/></svg>
 <!-- end of header -->
 
 <!-- Description -->
@@ -97,24 +96,24 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="text-container">
-                    <h2>Ganhe dinheiro compartilhando seu link de afiliado</h2>
-                    <p>Entre na pagina de <a href="<?= url("/app/perfil")?>">Perfil</a> e na aba afiliado, compratilhe seu link com seus amigos para você conseguir juntar pontos e trocar por dinheiro ou descontos na platafrma</p>
+                    <h2>Ganhe dinheiro compartilhando seu link de afiliado.</h2>
+                    <p>Entre na página de <a href="<?= url("/app/perfil")?>">Perfil</a> e na aba afiliado, compartilhe seu link com seus amigos para você conseguir juntar pontos e trocar por dinheiro ou descontos na plataforma.</p>
                     <h4>Ganho pontos quando meu amigo:</h4>
                     <ul class="list-unstyled li-space-lg">
                         <li class="media">
-                            <div class="media-body"><i class="fas fa-square"></i> Se cadastra e confirma o e-mail</div>
+                            <div class="media-body"><i class="fas fa-square"></i> Se cadastra e confirma o e-mail.</div>
                         </li>
                         <li class="media">
-                            <div class="media-body"><i class="fas fa-square"></i> Contrata um freelancer na plataforma</div>
+                            <div class="media-body"><i class="fas fa-square"></i> Contrata um freelancer na plataforma.</div>
                         </li>
                         <li class="media">
                             <div class="media-body"><i class="fas fa-square"></i> Trabalha em um projeto como freelancer</div>
                         </li>
                         <li class="media">
-                            <div class="media-body"><i class="fas fa-square"></i> Assina o plano PREMIUM</div>
+                            <div class="media-body"><i class="fas fa-square"></i> Assina o plano PREMIUM.</div>
                         </li>
                     </ul>
-                    <a class="btn-solid-reg page-scroll" href="<?= url("/app/perfil")?>">MEU LINK DE AFILIADO</a>
+                    <a class="btn-solid-reg page-scroll" href="<?= url("/app/perfil")?>">MEU LINK DE AFILIADO.</a>
                 </div> <!-- end of text-container -->
             </div> <!-- end of col -->
             <div class="col-lg-6">
@@ -195,7 +194,7 @@
                                     <p>É a sua primeira vez na <?= CONF_SITE_NAME?>? Então aprenda a como publicar um
                                         trabalho e ter acesso às propostas dos freelancers para tirar o seu sonho do papel.
                                         <a class="blue page-scroll" href="<?= url("/cadastrar") ?>">Cadastre-se</a>
-                                        e tenha em suas mãos as vantagens e a segurança que nenhum outro site de freelancer
+                                        e tenha em suas mãos, as vantagens e a segurança que nenhum outro site de freelancer
                                         oferece.</p>
                                     <ul class="list-unstyled li-space-lg">
                                         <li class="media">
@@ -232,10 +231,10 @@
                             <div class="col-lg-6">
                                 <div class="text-container">
                                     <h3>Encontre centenas de projetos</h3>
-                                    <p>É a sua primeira vez na <?= CONF_SITE_NAME?>? então aprenda a como enviar suas propostas
+                                    <p>É a sua primeira vez na <?= CONF_SITE_NAME?>? Então aprenda a como enviar suas propostas
                                         e ter acesso a vários clientes para decolar em sua carreira no mercado de trabalho.
                                         <a class="blue page-scroll" href="<?= url("/cadastrar") ?>">Cadastre-se</a>
-                                        e tenha em suas mãos a chance de ter quele dinheirinho extra ou uma fonte de renda
+                                        e tenha em suas mãos a chance de ter quele dinheiro extra ou uma fonte de renda
                                         com a segurança que nenhum outro site de freelancer
                                         oferece.</p>
                                     <ul class="list-unstyled li-space-lg">

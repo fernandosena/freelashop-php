@@ -81,8 +81,8 @@ class Freelancer extends Web
         }
 
         $head = $this->seo->render(
-            "Freelancer - " . CONF_SITE_NAME,
-            "Confira os resultados de sua pesquisa de freelancers",
+            "{$category} - " . CONF_SITE_NAME,
+            "Confira os resultados de sua pesquisa de freelancers - {$category}",
             url("/freelancers/buscar/{$category}/{$terms}/{$page}"),
             theme("/assets/images/share.jpg")
         );

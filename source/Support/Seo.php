@@ -52,9 +52,11 @@ class Seo
      * @param bool $follow
      * @return string
      */
-    public function render(string $title, string $description, string $url, string $image, bool $follow = true): string
+    public function render(string $title, string $description, string $url, string $image, bool $follow = true, ?array $arraySchema = null): string
     {
-        return $this->optimizer->optimize($title, $description, $url, $image, $follow)->render();
+        $optimize = $this->optimizer->optimize($title, $description, $url, $image, $follow)->render();
+        $optimize .= $this->schema(($arraySchema ?? null));
+        return $optimize;
     }
 
     /**
@@ -75,5 +77,16 @@ class Seo
     public function data(?string $title = null, ?string $desc = null, ?string $url = null, ?string $image = null)
     {
         return $this->optimizer->data($title, $desc, $url, $image);
+    }
+
+    public function schema(?array $arraySchema = null): string
+    {
+        $schema = "<script type='application/ld+json' class='yoast-schema-graph'>";
+        if(is_array($arraySchema)){
+            $schema .= json_encode($arraySchema);
+        }
+        $schema .= "</script>";
+
+        return $schema;
     }
 }
