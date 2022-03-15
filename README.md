@@ -2,7 +2,7 @@
 
 ## Shortcode's para textos no site
 * **[URL]** - Pega a url padrão do site dependendo do ambiente
->**Produção:** [URL] - Pega a url base **https://www.softhubo.com.br**
+>**Produção:** [URL] - Pega a url base **https://freelashop.com.br**
 
 >**Homologação:** [URL] - Pega a url base **localhost/freelahop**
 

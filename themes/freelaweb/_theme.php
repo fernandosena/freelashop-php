@@ -16,6 +16,8 @@
 
             gtag('config', 'G-5J6Q7GS2B7');
         </script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8647856942422335"
+                crossorigin="anonymous"></script>
         <!-- Favicon  -->
         <link rel="icon" type="image/png" href="<?= url("/storage/images/favicon.png"); ?>">
         <link href="<?= theme("/assets/style.css")?>" rel="stylesheet">
