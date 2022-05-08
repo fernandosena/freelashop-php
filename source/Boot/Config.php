@@ -5,24 +5,27 @@
 define("CONF_DB_HOST", "localhost");
 define("CONF_DB_USER", "root");
 define("CONF_DB_PASS", "");
-define("CONF_DB_NAME", "u813134528_freelashop");
+define("CONF_DB_NAME", "testes");
 
 /**
  * PROJECT URLs
  */
+define("CONF_URL_REDIRECT", "https://tucacoach.com.br");
 define("CONF_URL_BASE", "https://www.freelashop.com.br");
-define("CONF_URL_TEST", "http://localhost/freelashop");
+define("CONF_URL_TEST", "http://localhost/testes");
 
 /**
  * SITE
  */
-define("CONF_SITE_NAME", "FreelaShop");
+define("CONF_SITE_NAME", "Tuca Coach");
 define("CONF_SITE_TITLE", "Contrate ou seja um profissional freelancer");
 define("CONF_SITE_DESC", "Contrate um profissional de qualidade para realizar o seu projeto ou trabalhe hoje mesmo como um freelancer aqui no ".CONF_SITE_NAME.".");
 define("CONF_SITE_LANG", "pt_BR");
 define("CONF_SITE_CNPJ", "44.920.388/0001-14");
 define("CONF_SITE_DOMAIN", "freelashop.com.br");
-define("CONF_SITE_EMAIL", "sac@freelashop.com.br");
+define("CONF_SITE_EMAIL", [
+    "SAC" => "sac@freelashop.com.br"
+]);
 define("CONF_SITE_PHONE", "(11) 9 4363-2003");
 define("CONF_SITE_WHATSAPP", "(11) 9 4363-2003");
 define("CONF_SITE_ADDR_STREET", "Magalhães Lemos");
@@ -87,7 +90,7 @@ define("CONF_PASSWD_OPTION", ["cost" => 10]);
 define("CONF_MANUTENCAO", false);
 define("CONF_VIEW_PATH", __DIR__ . "/../../shared/views");
 define("CONF_VIEW_EXT", "php");
-define("CONF_VIEW_THEME", "freelaweb");
+define("CONF_VIEW_THEME", "freelashop");
 define("CONF_VIEW_APP", "freelaapp");
 define("CONF_VIEW_ADMIN", "freelaadm");
 

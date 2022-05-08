@@ -4,20 +4,12 @@ if (strpos(url(), "localhost")) {
      * CSS
      */
     $minCSS = new MatthiasMullie\Minify\CSS();
-    $minCSS->add(__DIR__ . "/../../../shared/styles/bootstrap.min.css");
-    $minCSS->add(__DIR__ . "/../../../shared/styles/boot.css");
-    $minCSS->add(__DIR__ . "/../../../shared/styles/fontawesome-all.css");
-    $minCSS->add(__DIR__ . "/../../../shared/styles/bs-stepper.min.css");
-    $minCSS->add(__DIR__ . "/../../../shared/styles/styles.css");
+    //Glogal
 
-    //theme CSS
-    $cssDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/css");
-    foreach ($cssDir as $css) {
-        $cssFile = __DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/css/{$css}";
-        if (is_file($cssFile) && pathinfo($cssFile)['extension'] == "css") {
-            $minCSS->add($cssFile);
-        }
-    }
+    //Theme
+    $minCSS->add(__DIR__ . "/../../../shared/plugins/bootstrap/bootstrap.min.css");
+    $minCSS->add(__DIR__ . "/../../../shared/plugins/bs-stepper-master/css/bs-stepper.min.css");
+    $minCSS->add(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/css/style.css");
 
     //Minify CSS
     $minCSS->minify(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/style.css");
@@ -26,25 +18,19 @@ if (strpos(url(), "localhost")) {
      * JS
      */
     $minJS = new MatthiasMullie\Minify\JS();
+
+    //Glogal
+    $minJS->add(__DIR__ . "/../../../shared/plugins/jquery-3.4.1/jquery-3.4.1.slim.min.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.min.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/popper.min.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/bootstrap.min.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.easing.min.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.form.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.mask.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/validator.min.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/bs-stepper.min.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/tracker.js");
-    $minJS->add(__DIR__ . "/../../../shared/scripts/scripts.js");
+    $minJS->add(__DIR__ . "/../../../shared/plugins/bootstrap/bootstrap.min.js");
+    $minJS->add(__DIR__ . "/../../../shared/plugins/bs-stepper-master/js/bs-stepper.min.js");
+    $minJS->add(__DIR__ . "/../../../shared/plugins/bs-stepper-master/js/main.js");
 
-    //theme CSS
-    $jsDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/js");
-    foreach ($jsDir as $js) {
-        $jsFile = __DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/js/{$js}";
-        if (is_file($jsFile) && pathinfo($jsFile)['extension'] == "js") {
-            $minJS->add($jsFile);
-        }
-    }
+    //Theme
+    $minJS->add(__DIR__ . "/../../../themes/".CONF_VIEW_THEME."/assets/js/script.js");
+
 
     //Minify JS
     $minJS->minify(__DIR__ . "/../../../themes/" . CONF_VIEW_THEME . "/assets/scripts.js");

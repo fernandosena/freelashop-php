@@ -9,6 +9,7 @@ use Source\Models\Faq\Channel;
 use Source\Models\Faq\Question;
 use Source\Models\FreelaApp\AppDepositions;
 use Source\Models\FreelaApp\AppScore;
+use Source\Models\Leads;
 use Source\Models\Newsletter;
 use Source\Models\FreelaApp\AppProject;
 use Source\Models\Post;
@@ -43,61 +44,46 @@ class Web extends Controller
         $this->user = (Auth::user() ?? null);
     }
 
-    /**
-     * SITE HOME
-     */
-    public function home(): void
+    public function home(?array $data): void
     {
-        $schema = [
-            "@context" => "http://schema.org",
-            "@type" => "WebSite",
-            "name" => CONF_SITE_NAME,
-            "alternateName" => CONF_SITE_NAME." Brasil",
-            "url" => url(),
-            "image" => [
-                "@type" => "ImageObject",
-                "url" => url("/storage/images/favicon.png"),
-                "height" => "400",
-                "width" => "400"
-            ],
-            "sameAs" => [
-                "https://www.facebook.com/".CONF_SOCIAL_PAGE["facebook"],
-                "https://twitter.com/".CONF_SOCIAL_PAGE["twitter"]
-            ],
-            "potentialAction" => [
-                "@type" => "SearchAction",
-                "target" => url()."/?query={search_term_string}",
-                "query-input" => "required name=search_term_string"
-            ]
-        ];
+        if (!empty($data['csrf'])) {
+            if (in_array("", $data)) {
+                $json['message'] = $this->message->info("Informe seus dados para acessar seu teste.")->render();
+                echo json_encode($json);
+                return;
+            }
+
+            $auth = new Auth();
+            $leads = new Leads();
+            $leads->bootstrap(
+                $data["full_name"],
+                $data["email"],
+                $data["phone"]
+            );
+
+            if ($auth->registerLeads($leads)) {
+                $json['redirect'] = url("/{$data["teste"]}");
+            } else {
+                $json['message'] = $auth->message()->before("Ooops! ")->render();
+            }
+
+            echo json_encode($json);
+            return;
+        }
 
         $head = $this->seo->render(
-            CONF_SITE_NAME . " - " . CONF_SITE_TITLE,
+            "Criar Conta - " . CONF_SITE_NAME,
             CONF_SITE_DESC,
-            url(),
-            theme("/assets/images/share.jpg"),
-            true,
-            $schema
+            url("/cadastrar"),
+            theme("/assets/images/share.jpg")
         );
-
 
         echo $this->view->render("home", [
             "head" => $head,
-            "footerEffect" => true,
-            "categories" => (new Category())->find("cover IS NOT NULL AND type = 'project'")
-                            ->limit(8)
-                            ->fetch(true),
-            "video" => "",
-            "depositions" => (new AppDepositions())
-                ->find("active = 'Y'")
-                ->fetch(true),
-            "posts" => (new Post())->find("status = 'post'")
-                        ->order("views ASC")
-                        ->limit(8)
-                        ->fetch(true)
+            "teste" => $data["page"]
         ]);
-
     }
+
 
     /**
      * SITE ABOUT
@@ -123,7 +109,7 @@ class Web extends Controller
             "contactPoint" => [
                 "@type" => "ContactPoint",
                 "contactType" => "Sales",
-                "email" => "mailto:".CONF_SITE_EMAIL,
+                "email" => "mailto:".CONF_SITE_EMAIL["SAC"],
                 "url" => url()."#footer",
             ],
             "sameAs" => [
@@ -150,6 +136,135 @@ class Web extends Controller
                 ->fetch(true)
         ]);
     }
+
+
+    /**
+     * SITE ABOUT
+     */
+    public function howWorks(array $data): void
+    {
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+
+        $schema = [
+            "@context" => "http://schema.org",
+            "@type" => "Organization",
+            "name" => CONF_SITE_NAME,
+            "alternateName" => "Contratação de freelancer ".CONF_SITE_NAME,
+            "foundingDate" => "2022",
+            "logo" => url("/storage/images/favicon.png"),
+            "image" =>  url("/storage/images/favicon.png"),
+            "url" => url("/sobre"),
+            "address" => [
+                "@type" => "PostalAddress",
+                "streetAddress" => CONF_SITE_ADDR_STREET.", ".CONF_SITE_ADDR_CITY." - ".CONF_SITE_ADDR_STATE.", ".CONF_SITE_ADDR_ZIPCODE,
+                "addressLocality" => CONF_SITE_ADDR_CITY,
+                "postalCode" => CONF_SITE_ADDR_ZIPCODE,
+                "addressCountry" => "BRA"
+            ],
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "Sales",
+                "email" => "mailto:".CONF_SITE_EMAIL["SAC"],
+                "url" => url()."#footer",
+            ],
+            "sameAs" => [
+                "https://www.facebook.com/".CONF_SOCIAL_PAGE["facebook"],
+                "https://twitter.com/".CONF_SOCIAL_PAGE["twitter"]
+            ],
+        ];
+
+        $head = $this->seo->render(
+            "Como funciona freelancer -  " . CONF_SITE_NAME,
+            "Desde o seu começo, em 2021, a missão da ".CONF_SITE_NAME." é oferecer serviços de comunicação que facilitam a vida dos freelancers e dos seus clientes.",
+            url("/sobre"),
+            theme("/assets/images/share.jpg"),
+            true,
+            $schema
+        );
+
+        if(!empty($data["type"]) && $data["type"] == "freelancer"){
+            $video = [
+                "thumb"=>"thumb-freelancer.png",
+                "link" => ""
+            ];
+            $image = "freelancer.png";
+            $dados = [
+                [
+                    "icon" => "user.png",
+                    "title" => "Passo 1: Crie um perfil",
+                    "description" => "Inscreva-se e crie um perfil gratuitamente. Adicione referências e informações sobre projetos 
+                    anteriores e solicitando feedback de empregadores anteriores."
+                ],
+                [
+                    "icon" => "rede.png",
+                    "title" => "Passo 2: Convide outros empreendedores",
+                    "description" => "Convite outros empreendedores a participarem da sua rede, para isso você pode usar o seu link de 
+                    afiliação para isso, ganhe pontos, descontos e dinheiro com isso."
+                ],
+                [
+                    "icon" => "list.png",
+                    "title" => "Passo 3: Encontre projetos interessantes",
+                    "description" => "Demonstre interesse em um projeto e entre em contato. Você também pode encontrar 
+                    um profissional usando o filtro de pesquisa e entrando em contato diretamente com ele ou enviando 
+                    um projeto. "
+                ],
+                [
+                    "icon" => "check.png",
+                    "title" => "Passo 4: Expanda sua rede e receba feedback",
+                    "description" => "Receba feedback após completar um projeto. Você pode solicitar feedback a partir 
+                    da sua conta. Expanda sua rede convidando mais profissionais para a sua rede. Quando alguém aceitar 
+                    seu convite para se conectar, você também ganhará acesso à sua rede."
+                ]
+            ];
+        }else if($data["type"] == "contratante"){
+            $video = [
+                "thumb"=>"thumb-contratante.png",
+                "link" => ""
+            ];
+            $image = "contratante.png";
+            $dados = [
+                [
+                    "icon" => "publish.png",
+                    "title" => "Passo 1: Publique seu projeto",
+                    "description" => 'Na página inicial ou no menu, você pode encontrar o botão "Contratar freelancer". 
+                    Você pode publicar um projeto para terceirizar trabalho ou para encontrar um freelancer. Escolha um 
+                    título para o seu projeto e selecione a categoria na qual deseja publicar seu projeto. Quando digitar
+                     as informações, pressione "Publicar Projeto".'
+                ],
+                [
+                    "icon" => "list.png",
+                    "title" => "Passo 2: Os freelancers certos recebem seu projeto",
+                    "description" => "Após publicar o projeto, um dos nossos funcionários validará e aprovará seu 
+                    projeto. Uma vez aprovado, encaminharemos seu projeto aos freelancers apropriados a onde os melhores
+                     irão te mandar propostas."
+                ],
+                [
+                    "icon" => "dinheiro.png",
+                    "title" => "Passo 3: Receba ofertas",
+                    "description" => "Quando você receber uma oferta, nós lhe notificaremos via e-mail. Com base nas
+                     ofertas e nos perfis dos freelancers que responderam, você seleciona com quem prosseguir. 
+                     "
+                ],
+                [
+                    "icon" => "check.png",
+                    "title" => "Passo 4: Selecione seu freelancer",
+                    "description" => "Após receber várias propostas é só escolher o seu freelancer ideal é só você 
+                    clicar no botão para contratar o freelancer, irá pedir para você realizar o pagamento para a
+                     nossa plataforma, dessa forma seu dinheiro estará 100% seguro."
+                ]
+            ];
+        }else{
+            redirect("/404");
+        }
+        echo $this->view->render("how-works", [
+            "head" => $head,
+            "title" => $data["type"],
+            "image" => $image,
+            "video" => $video,
+            "dados" => $dados
+        ]);
+    }
+
 
     /**
      * SITE FAQ

@@ -5,9 +5,7 @@ namespace Source\Models;
 use Source\Core\Model;
 use Source\Core\Session;
 use Source\Core\View;
-use Source\Models\FreelaApp\AppScore;
 use Source\Support\Email;
-use Source\Support\Log;
 
 /**
  * Class Auth
@@ -36,6 +34,16 @@ class Auth extends Model
         return (new User())->findById($session->authUser);
     }
 
+    public static function lead(): ?Leads
+    {
+        $session = new Session();
+        if (!$session->has("authLead")) {
+            return null;
+        }
+
+        return (new Leads())->findById($session->authLead);
+    }
+
     /**
      * log-out
      */
@@ -51,28 +59,35 @@ class Auth extends Model
      */
     public function register(User $user): bool
     {
-        try{
-            if (!$user->save()) {
-                $this->message = $user->message;
-                return false;
-            }
-
-            (new Email())->bootstrap(
-                "Ative sua conta no " . CONF_SITE_NAME,
-                $user->email,
-                $user->fullName()
-            )->view(
-            "confirm",[
-                    "first_name" => $user->first_name,
-                    "confirm_link" => url("/obrigado/" . base64_encode($user->email))
-                ]
-            )->queue();
-
-            return true;
-        }catch (\Exception $exception){
-            $this->message->error("Erro ao criar usuário");
+        if (!$user->save()) {
+            $this->message = $user->message;
             return false;
         }
+
+        $view = new View(__DIR__ . "/../../shared/views/email");
+        $message = $view->render("confirm", [
+            "first_name" => $user->first_name,
+            "confirm_link" => url("/obrigado/" . base64_encode($user->email))
+        ]);
+
+        (new Email())->bootstrap(
+            "Ative sua conta no " . CONF_SITE_NAME,
+            $message,
+            $user->email,
+            "{$user->first_name} {$user->last_name}"
+        )->send();
+
+        return true;
+    }
+
+    public function registerLeads(Leads $user): bool
+    {
+        if (!$user->save()) {
+            $this->message = $user->message;
+            return false;
+        }
+        (new Session())->set("authLead", $user->id);
+        return true;
     }
 
     /**
@@ -96,12 +111,12 @@ class Auth extends Model
         $user = (new User())->findByEmail($email);
 
         if (!$user) {
-            $this->message->warning("O e-mail informado não está cadastrado");
+            $this->message->error("O e-mail informado não está cadastrado");
             return null;
         }
 
         if (!passwd_verify($password, $user->password)) {
-            $this->message->warning("A senha informada não confere");
+            $this->message->error("A senha informada não confere");
             return null;
         }
 
@@ -143,6 +158,18 @@ class Auth extends Model
         return true;
     }
 
+    public function loginLead(string $email, int $level = 1): bool
+    {
+        $user = (new Leads())->findByEmail($email);
+        if (!$user) {
+            return false;
+        }
+
+        //LOGIN
+        (new Session())->set("authLead", $user->id);
+        return true;
+    }
+
     /**
      * @param string $email
      * @return bool
@@ -159,16 +186,18 @@ class Auth extends Model
         $user->forget = md5(uniqid(rand(), true));
         $user->save();
 
+        $view = new View(__DIR__ . "/../../shared/views/email");
+        $message = $view->render("forget", [
+            "first_name" => $user->first_name,
+            "forget_link" => url("/recuperar/{$user->email}|{$user->forget}")
+        ]);
+
         (new Email())->bootstrap(
             "Recupere sua senha no " . CONF_SITE_NAME,
+            $message,
             $user->email,
-            $user->fullName()
-        )->view(
-            "forget", [
-                "first_name" => $user->first_name,
-                "forget_link" => url("/recuperar/{$user->email}|{$user->forget}")
-            ]
-        )->queue();
+            "{$user->first_name} {$user->last_name}"
+        )->send();
 
         return true;
     }
@@ -190,7 +219,7 @@ class Auth extends Model
         }
 
         if ($user->forget != $code) {
-            $this->message->warning("Desculpe, mas o código de verificação não é válido.");
+            $this->message->error("Desculpe, mas o código de verificação não é válido.");
             return false;
         }
 
@@ -209,16 +238,6 @@ class Auth extends Model
         $user->password = $password;
         $user->forget = null;
         $user->save();
-
-        (new Email())->bootstrap(
-            "Senha alterada com sucesso no " . CONF_SITE_NAME,
-            $user->email,
-            $user->fullName()
-        )->view(
-            "forget_success", [
-                "first_name" => $user->first_name
-            ]
-        )->queue();
         return true;
     }
 }

@@ -22,7 +22,7 @@
         <link rel="icon" type="image/png" href="<?= url("/storage/images/favicon.png"); ?>">
         <link href="<?= theme("/assets/style.css")?>" rel="stylesheet">
     </head>
-    <body data-spy="scroll" data-target=".fixed-top">
+    <body data-spy="scroll" data-target=".fixed-top"  onKeyDown="AnalizaTeclas()">
 
         <!-- Preloader -->
         <div class="spinner-wrapper">

@@ -69,6 +69,7 @@ class User extends Web
         echo $this->view->render("auth-login", [
             "head" => $head,
             "cookie" => filter_input(INPUT_COOKIE, "authEmail"),
+            "noHeader" => true,
             "noFooter" => true
         ]);
     }
@@ -146,6 +147,27 @@ class User extends Web
         echo $this->view->render("auth-register", [
             "head" => $head,
             "userID" => $userID,
+            "noHeader" => true,
+            "noFooter" => true
+        ]);
+    }
+
+    public function registerOption(): void
+    {
+        if (Auth::user()) {
+            redirect("/projetos");
+        }
+
+        $head = $this->seo->render(
+            "Criar Conta - " . CONF_SITE_NAME,
+            CONF_SITE_DESC,
+            url("/cadastrar"),
+            theme("/assets/images/share.jpg")
+        );
+
+        echo $this->view->render("auth-option", [
+            "head" => $head,
+            "noHeader" => true,
             "noFooter" => true
         ]);
     }
