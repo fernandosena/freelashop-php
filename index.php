@@ -24,6 +24,7 @@ $route->namespace("Source\App\Web");
 $route->group(null);
 $route->get("/", "Web:home");
 $route->get("/sobre", "Web:about");
+$route->get("/como-funciona/{type}", "Web:howWorks");
 $route->get("/projetos", "Web:project");
 $route->get("/freelancers", "Web:freelancer");
 $route->get("/faq/freelancer", "Web:faq");
@@ -38,6 +39,7 @@ $route->get("/criar-projeto", "Project:action");
 
 
 $route->get("/entrar", "User:login");
+$route->get("/cadastre-se", "User:registerOption");
 $route->get("/cadastrar", "User:register");
 $route->get("/cadastrar/{base64_email}", "User:register");
 $route->get("/recuperar", "User:forget");
